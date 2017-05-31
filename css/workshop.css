@@ -1,0 +1,9 @@
+.page-header {
+    padding-bottom: 9px;
+    margin: 112px 0 20px;
+    border-bottom: 1px solid #eee;
+}
+.navbar-inverse .navbar-brand {
+    color: #ffffff;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
