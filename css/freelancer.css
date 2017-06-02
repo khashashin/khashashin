@@ -196,6 +196,12 @@ section.success {
   margin: 0 0 15px;
   right: 0;
 }
+.modal-body img {
+  margin-top: 50px;
+}
+.makerange {
+  margin-top: 50px;
+}
 #portfolio .portfolio-item .portfolio-link {
   display: block;
   position: relative;
