@@ -93,7 +93,7 @@ header .intro-text .skills {
 @media (min-width: 768px) {
   header .container {
     padding-top: 200px;
-    padding-bottom: 100px;
+    padding-bottom: 40px;
   }
   header .intro-text .name {
     font-size: 4.75em;
@@ -198,6 +198,9 @@ section.success {
 }
 .modal-body img {
   margin-top: 50px;
+}
+.modal-body p a {
+  color: #2864ff
 }
 .makerange {
   margin-top: 50px;
@@ -456,6 +459,9 @@ fieldset[disabled] .btn-success.active {
 }
 .portfolio-modal .modal-content .item-details {
   margin: 30px 0;
+}
+.item-details a {
+  color: #2d2d2d
 }
 .portfolio-modal .close-modal {
   position: absolute;
