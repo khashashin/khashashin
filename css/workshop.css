@@ -1,4 +1,4 @@
-.page-header {
+.page-top-header {
     padding-bottom: 9px;
     margin: 150px 0 20px;
     border-bottom: 1px solid #eee;
@@ -9,4 +9,8 @@
   text-transform: uppercase;
   font-weight: 700;
   border: none;
+}
+.page-top-header a img {
+  height: 50px;
+  width: 50px;
 }
