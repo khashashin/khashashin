@@ -1,0 +1,82 @@
+{% load static wagtailuserbar %}
+
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            {% block title %}
+                {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+            {% endblock %}
+            {% block title_suffix %}
+                {% with self.get_site.site_name as site_name %}
+                    {% if site_name %}- {{ site_name }}{% endif %}
+                {% endwith %}
+            {% endblock %}
+        </title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {# Global stylesheets #}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/khas.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        
+
+        {% block extra_css %}
+            {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
+    </head>
+
+    <body class="{% block body_class %}{% endblock %}">
+        {% wagtailuserbar %}
+        <div class="container">
+            <div class="row">
+                <!-- Profile -->
+                <div class="col s3">
+                    <div class="profile">
+                        {% block profile %}{% endblock %}
+                    </div>
+                </div>
+                <!-- GitHub Graph -->
+                <div class="col s6">
+                    <div class="github">
+                        {% block github %}{% endblock %}
+                    </div>
+                </div>
+                <!-- Twitter -->
+                <div class="col s3">
+                    <div class="twitter">
+                        {% block twitter %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Contact -->
+                <div class="col s3">
+                    <div class="contact">
+                        {% block contact %}{% endblock %}
+                    </div>
+                </div>
+                <!-- Blog Posts -->
+                <div class="col s3">
+                    <div class="posts">
+                        {% block posts %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        {# Global javascript #}
+        <script type="text/javascript" src="{% static 'js/khas.js' %}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+
+        {% block extra_js %}
+            {# Override this in templates to add extra javascript #}
+        {% endblock %}
+    </body>
+</html>
