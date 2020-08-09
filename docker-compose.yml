@@ -2,6 +2,7 @@ version: '3.7'
 
 services:
     server:
+        container_name: dj
         build:
             context: ./server/khashashin/
         expose:
@@ -15,6 +16,7 @@ services:
         depends_on:
             - db
     db:
+        container_name: postgres
         image: postgres:12.0-alpine
         volumes:
             - postgres_data:/var/lib/postgresql/data/
@@ -23,6 +25,7 @@ services:
             - POSTGRES_PASSWORD=khashashin_pw
             - POSTGRES_DB=khashashin_dev_db
     nginx:
+        container_name: nginx
         build:
             context: ./nginx
         volumes:
