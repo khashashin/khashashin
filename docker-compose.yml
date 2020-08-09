@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-    backend:
+    server:
         build:
             context: ./server/khashashin/
         expose:
@@ -31,7 +31,7 @@ services:
         ports:
             - 1337:80
         depends_on:
-            - backend
+            - server
 
 volumes:
     postgres_data:
