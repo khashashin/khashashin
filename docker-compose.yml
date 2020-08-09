@@ -15,6 +15,14 @@ services:
             - ./server/khashashin/.env
         depends_on:
             - db
+    client:
+        container_name: app
+        build:
+            context: ./client/khas-app
+        volumes:
+            - www_volume:/app/dist/out
+        depends_on:
+            - server
     db:
         container_name: postgres
         image: postgres:12.0-alpine
