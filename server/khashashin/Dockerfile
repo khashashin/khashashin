@@ -1,6 +1,5 @@
 # pull official base image
 FROM python:3.8.3-alpine
-LABEL maintainer="khashashin"
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
