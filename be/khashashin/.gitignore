@@ -1,5 +1,0 @@
-*.sqlite3
-.venv/
-static/
-media/
-__pycache__/
