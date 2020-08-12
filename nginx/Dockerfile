@@ -6,7 +6,7 @@ RUN mkdir /app
 WORKDIR /app
 
 # Copy app dependencies.
-COPY package*.json /app/
+COPY ../client/khas-app/package*.json /app/
 
 # Install app dependencies.
 RUN npm install
