@@ -6,13 +6,13 @@ RUN mkdir /app
 WORKDIR /app
 
 # Copy app dependencies.
-COPY ../client/khas-app/package*.json /app/
+COPY client/khas-app/package*.json /app/
 
 # Install app dependencies.
 RUN npm install
 
 # Copy app files.
-COPY ../client/khas-app/ /app/
+COPY client/khas-app/ /app/
 
 # Build app
 RUN npm run build -- --output-path=./dist/out
@@ -24,4 +24,4 @@ FROM nginx:1.19.1-alpine
 # Copy compiled app files from previous build
 COPY --from=build /app/dist/out /usr/share/nginx/html
 
-COPY ./default.conf /etc/nginx/conf.d/default.conf
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
