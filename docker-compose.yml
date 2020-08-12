@@ -35,7 +35,8 @@ services:
     nginx:
         container_name: nginx
         build:
-            context: ./nginx
+            context: ./
+            dockerfile: Dockerfile
         volumes:
             - static_volume:/app/staticfiles
             - media_volume:/app/media
