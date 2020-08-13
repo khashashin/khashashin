@@ -1,0 +1,72 @@
+version: '3.7'
+
+services:
+    server:
+        container_name: dj
+        build:
+            context: ./server/khashashin/
+        expose:
+            - 8000
+        volumes:
+            - static_volume:/app/staticfiles
+            - media_volume:/app/media
+        command: gunicorn khashashin.wsgi:application --bind 0.0.0.0:8000
+        env_file:
+            - ./server/khashashin/.env
+        depends_on:
+            - db
+    # client:
+    #     container_name: app
+    #     build:
+    #         context: ./client/khas-app
+    #     volumes:
+    #         - www_volume:/app/dist/out
+    #     depends_on:
+    #         - server
+    db:
+        container_name: postgres
+        image: postgres:12.0-alpine
+        volumes:
+            - postgres_data:/var/lib/postgresql/data/
+        environment:
+            - POSTGRES_USER=khashashin
+            - POSTGRES_PASSWORD=khashashin_pw
+            - POSTGRES_DB=khashashin_dev_db
+    pgadmin:
+        container_name: pgadmin
+        image: dpage/pgadmin4:latest
+        restart: always
+        environment:
+            - PGADMIN_DEFAULT_EMAIL=khashashin@khas.dev
+            - PGADMIN_DEFAULT_PASSWORD=khashashin_pw
+            - PGADMIN_LISTEN_PORT=6553
+        expose:
+            - 6553
+        volumes:
+            - pgadmin-data:/var/lib/pgadmin
+        links:
+            - db:pgsql-server
+    nginx:
+        container_name: nginx
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        volumes:
+            - static_volume:/app/staticfiles
+            - media_volume:/app/media
+            - /etc/letsencrypt:/etc/letsencrypt
+            - /var/lib/letsencrypt:/var/lib/letsencrypt
+            # - www_volume:/usr/share/nginx/html
+        ports:
+            - 1337:80
+            - 80:80
+            - 443:443
+        depends_on:
+            - server
+
+volumes:
+    postgres_data:
+    static_volume:
+    media_volume:
+    pgadmin-data:
+    # www_volume:
