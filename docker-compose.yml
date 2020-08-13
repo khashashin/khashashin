@@ -40,10 +40,13 @@ services:
         volumes:
             - static_volume:/app/staticfiles
             - media_volume:/app/media
+            - /etc/letsencrypt:/etc/letsencrypt
+            - /var/lib/letsencrypt:/var/lib/letsencrypt
             # - www_volume:/usr/share/nginx/html
         ports:
             - 1337:80
             - 80:80
+            - 443:443
         depends_on:
             - server
 
