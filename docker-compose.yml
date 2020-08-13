@@ -32,6 +32,20 @@ services:
             - POSTGRES_USER=khashashin
             - POSTGRES_PASSWORD=khashashin_pw
             - POSTGRES_DB=khashashin_dev_db
+    pgadmin:
+        container_name: pgadmin
+        image: dpage/pgadmin4:latest
+        restart: always
+        environment:
+            - PGADMIN_DEFAULT_EMAIL=khashashin@khas.dev
+            - PGADMIN_DEFAULT_PASSWORD=khashashin_pw
+            - PGADMIN_LISTEN_PORT=6553
+        expose:
+            - 6553
+        volumes:
+            - pgadmin-data:/var/lib/pgadmin
+        links:
+            - db:pgsql-server
     nginx:
         container_name: nginx
         build:
@@ -54,4 +68,5 @@ volumes:
     postgres_data:
     static_volume:
     media_volume:
+    pgadmin-data:
     # www_volume:
