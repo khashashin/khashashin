@@ -5,6 +5,7 @@ services:
         container_name: dj
         build:
             context: ./server/khashashin/
+        restart: unless-stopped
         expose:
             - 8000
         volumes:
@@ -15,17 +16,20 @@ services:
             - ./server/khashashin/.env
         depends_on:
             - db
-    # client:
-    #     container_name: app
-    #     build:
-    #         context: ./client/khas-app
-    #     volumes:
-    #         - www_volume:/app/dist/out
-    #     depends_on:
-    #         - server
+    certbot:
+        container_name: cerbot
+        image: certbot/certbot
+        volumes:
+            - www_volume:/usr/share/nginx/html
+            - certbot_etc:/etc/letsencrypt
+            - certbot_var:/var/lib/letsencrypt
+        depends_on:
+            - nginx
+        command: certonly --webroot --webroot-path=/usr/share/nginx/html --email khashashin@gmail.com --agree-tos --no-eff-email --force-renewal -d khas.dev -d www.khas.dev
     db:
         container_name: postgres
         image: postgres:12.0-alpine
+        restart: unless-stopped
         volumes:
             - postgres_data:/var/lib/postgresql/data/
         environment:
@@ -35,7 +39,7 @@ services:
     pgadmin:
         container_name: pgadmin
         image: dpage/pgadmin4:latest
-        restart: always
+        restart: unless-stopped
         environment:
             - PGADMIN_DEFAULT_EMAIL=khashashin@khas.dev
             - PGADMIN_DEFAULT_PASSWORD=khashashin_pw
@@ -43,7 +47,7 @@ services:
         expose:
             - 6553
         volumes:
-            - pgadmin-data:/var/lib/pgadmin
+            - pgadmin_data:/var/lib/pgadmin
         links:
             - db:pgsql-server
     nginx:
@@ -51,12 +55,14 @@ services:
         build:
             context: ./
             dockerfile: Dockerfile
+        restart: unless-stopped
         volumes:
             - static_volume:/app/staticfiles
             - media_volume:/app/media
-            - /etc/letsencrypt:/etc/letsencrypt
-            - /var/lib/letsencrypt:/var/lib/letsencrypt
-            # - www_volume:/usr/share/nginx/html
+            - certbot_etc:/etc/letsencrypt
+            - certbot_var:/var/lib/letsencrypt
+            - www_volume:/usr/share/nginx/html
+            - dhparam:/etc/ssl/certs
         ports:
             - 1337:80
             - 80:80
@@ -68,5 +74,14 @@ volumes:
     postgres_data:
     static_volume:
     media_volume:
-    pgadmin-data:
-    # www_volume:
+    pgadmin_data:
+    www_volume:
+    certbot_etc:
+    certbot_var:
+    dhparam:
+        driver: local
+        driver_opts:
+            type: none
+            device: /home/khashashin/khashashin/nginx/dhparam/
+            o: bind
+
