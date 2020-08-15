@@ -50,6 +50,8 @@ services:
             - pgadmin_data:/var/lib/pgadmin
         links:
             - db:pgsql-server
+        depends_on:
+            - db
     nginx:
         container_name: nginx
         build:
