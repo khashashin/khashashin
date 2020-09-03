@@ -1,89 +1,88 @@
 version: '3.7'
 
 services:
-    server:
+    django:
         container_name: dj
-        build:
-            context: ./server/khashashin/
+        build: 
+           context: ./server
         restart: unless-stopped
-        expose:
-            - 8000
+        labels:
+           - "traefik.enable=true"
+           - "traefik.http.routers.${SERVICE}-api.rule=Host(`api.${DOMAIN_NAME}`)"
+           - "traefik.http.routers.${SERVICE}-api.tls.certresolver=letsEncrypt"
+           - "traefik.http.routers.${SERVICE}-api.entrypoints=web-secure"
         volumes:
-            - static_volume:/app/staticfiles
-            - media_volume:/app/media
+           - staticfiles:/app/staticfiles
+           - mediafiles:/app/media
         command: gunicorn khashashin.wsgi:application --bind 0.0.0.0:8000
-        env_file:
-            - ./server/khashashin/.env
-        depends_on:
-            - db
-    certbot:
-        container_name: cerbot
-        image: certbot/certbot
-        volumes:
-            - www_volume:/usr/share/nginx/html
-            - certbot_etc:/etc/letsencrypt
-            - certbot_var:/var/lib/letsencrypt
-        depends_on:
-            - nginx
-        command: certonly --webroot --webroot-path=/usr/share/nginx/html --email khashashin@gmail.com --agree-tos --no-eff-email --force-renewal -d khas.dev -d www.khas.dev
-    db:
-        container_name: postgres
-        image: postgres:12.0-alpine
-        restart: unless-stopped
-        volumes:
-            - postgres_data:/var/lib/postgresql/data/
-        environment:
-            - POSTGRES_USER=khashashin
-            - POSTGRES_PASSWORD=khashashin_pw
-            - POSTGRES_DB=khashashin_dev_db
-    pgadmin:
-        container_name: pgadmin
-        image: dpage/pgadmin4:latest
-        restart: unless-stopped
-        environment:
-            - PGADMIN_DEFAULT_EMAIL=khashashin@khas.dev
-            - PGADMIN_DEFAULT_PASSWORD=khashashin_pw
-            - PGADMIN_LISTEN_PORT=6553
+        env_file: ./server/.env
         expose:
-            - 6553
-        volumes:
-            - pgadmin_data:/var/lib/pgadmin
-        links:
-            - db:pgsql-server
+           - 8000
+        networks:
+           - web
+           - django
         depends_on:
-            - db
+           - db
+    db:
+       container_name: postgres
+       image: postgres:12.0-alpine
+       restart: unless-stopped
+       labels:
+          - "traefik.enable=false"
+       volumes:
+          - postgres_data:/var/lib/postgresql/data/
+       env_file: ./db/.env
+       networks:
+          - django
+    pgadmin:
+       container_name: pgadmin
+       image: dpage/pgadmin4:latest
+       restart: unless-stopped
+       labels:
+          - "traefik.enable=true"
+          - "traefik.http.routers.${SERVICE}-pgadmin.rule=Host(`pgadmin.${DOMAIN_NAME}`)"
+          - "traefik.http.routers.${SERVICE}-pgadmin.tls.certresolver=letsEncrypt"
+          - "traefik.http.routers.${SERVICE}-pgadmin.entrypoints=web-secure"
+          - "traefik.http.services.${SERVICE}-pgadmin.loadbalancer.server.port=6553"
+       volumes:
+          - pgadmin_data:/var/lib/pgadmin
+       env_file: ./db/pgadmin/.env
+       links:
+          - db:pgsql-server
+       networks:
+          - web
+          - django
+       depends_on:
+          - db
     nginx:
-        container_name: nginx
-        build:
-            context: ./
-            dockerfile: Dockerfile
-        restart: unless-stopped
-        volumes:
-            - static_volume:/app/staticfiles
-            - media_volume:/app/media
-            - certbot_etc:/etc/letsencrypt
-            - certbot_var:/var/lib/letsencrypt
-            - www_volume:/usr/share/nginx/html
-            - dhparam:/etc/ssl/certs
-        ports:
-            - 1337:80
-            - 80:80
-            - 443:443
-        depends_on:
-            - server
+       container_name: nginx
+       build:
+          context: ./
+          dockerfile: Dockerfile
+       restart: unless-stopped
+       labels:
+           - "traefik.enable=true"
+           - "traefik.http.routers.${SERVICE}-client.rule=Host(`${DOMAIN_NAME}`) || (Host(`api.${DOMAIN_NAME}`) && PathPrefix(`/static/`))"
+           - "traefik.http.routers.${SERVICE}-client.tls.certresolver=letsEncrypt"
+           - "traefik.http.routers.${SERVICE}-client.entrypoints=web-secure"
+       volumes:
+           - staticfiles:/app/staticfiles
+           - mediafiles:/app/media
+       expose:
+           - 80
+       networks:
+           - web
+       depends_on:
+           - django
 
 volumes:
+    staticfiles: 
+    mediafiles:
     postgres_data:
-    static_volume:
-    media_volume:
     pgadmin_data:
-    www_volume:
-    certbot_etc:
-    certbot_var:
-    dhparam:
-        driver: local
-        driver_opts:
-            type: none
-            device: /home/khashashin/khashashin/nginx/dhparam/
-            o: bind
 
+networks:
+    web:
+        external: true
+    django:
+        external: false

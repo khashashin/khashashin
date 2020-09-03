@@ -6,13 +6,13 @@ RUN mkdir /app
 WORKDIR /app
 
 # Copy app dependencies.
-COPY client/khas-app/package*.json /app/
+COPY client/package*.json /app/
 
 # Install app dependencies.
 RUN npm install
 
 # Copy app files.
-COPY client/khas-app/ /app/
+COPY client/ /app/
 
 # Build app
 RUN npm run build -- --output-path=./dist/out
