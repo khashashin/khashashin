@@ -16,6 +16,7 @@
 <a href="https://twitter.com/khashashin" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="stnguyen90" height="30" width="40" /></a>
 <a href="https://linkedin.com/in/khashashin" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="stnguyen90" height="30" width="40" /></a>
 </p>
+<img src="https://komarev.com/ghpvc/?username=khashashin&style=flat-square&color=blue" alt=""/>
 
 ### Languages and Tools
 
@@ -134,3 +135,6 @@
 </p>
 <img src="https://github-readme-stats.vercel.app/api/top-langs?username=khashashin&show_icons=true&locale=en&layout=compact&theme=onedark" alt="khashashin" />
 <img src="https://github-readme-stats.vercel.app/api?username=khashashin&show_icons=true&locale=en&hide=stars&theme=onedark" alt="khashashin" />
+
+[![GitHub Streak](http://github-readme-streak-stats.herokuapp.com?user=khashashin&theme=onedark)](https://git.io/streak-stats)
+
