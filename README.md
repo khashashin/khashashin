@@ -1,7 +1,7 @@
 <h1 align="center">Hi 👋, I'm Yusuf</h1>
 <h3 align="center">Tech enthusiast and problem solver</h3>
 
-- 🔭 I’m currently working at [89grad GmbH](https://89grad.ch/)
+- 🔭 I’m currently working at [geoimpact AG](https://www.geoimpact.ch/)
 
 ### Blogs posts
 <!-- BLOG-POST-LIST:START -->
