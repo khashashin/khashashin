@@ -10,8 +10,6 @@
 - [Protect Self-Hosted Services with CrowdSec and Traefik](https://community.hetzner.com/tutorials/coolify-crowdsec-traefik-supavisor-protection)
 - [Centralized Security Monitoring with Prometheus and Grafana](https://community.hetzner.com/tutorials/coolify-crowdsec-prometheus-grafana-monitoring)
 - [WAN Interface Monitoring on Fritzbox Router](https://medium.com/@khashashin/wan-interface-monitoring-722ad0f016fd)
-- [New JetBrains IDE UI](https://www.linkedin.com/pulse/new-jetbrains-ide-ui-yusuf-khasbulatov/?trackingId=2%2FVDOQ6MRkecs7B2vwtI%2BQ%3D%3D)
-- [Warum ich PyCharm liebe](https://www.linkedin.com/pulse/warum-ich-pycharm-liebe-yusuf-khasbulatov/)
 <!-- BLOG-POST-LIST:END -->
 
 ### Connect with me
