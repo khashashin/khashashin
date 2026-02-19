@@ -5,6 +5,7 @@
 
 ### Blogs posts
 <!-- BLOG-POST-LIST:START -->
+- [Centralized CrowdSec Management with Web UI](https://community.hetzner.com/tutorials/coolify-crowdsec-centralized-lapi)
 - [Deploy Self-Hosted Supabase on Hetzner Cloud with Coolify](https://community.hetzner.com/tutorials/coolify-supabase-deploy)
 - [Harden PostgreSQL SSL for Self-Hosted Supabase](https://community.hetzner.com/tutorials/coolify-supabase-postgresql-ssl-hardening)
 - [Protect Self-Hosted Services with CrowdSec and Traefik](https://community.hetzner.com/tutorials/coolify-crowdsec-traefik-supavisor-protection)
