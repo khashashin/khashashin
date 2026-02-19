@@ -5,11 +5,11 @@
 
 ### Blogs posts
 <!-- BLOG-POST-LIST:START -->
-- [Centralized CrowdSec Management with Web UI](https://community.hetzner.com/tutorials/coolify-crowdsec-centralized-lapi)
 - [Deploy Self-Hosted Supabase on Hetzner Cloud with Coolify](https://community.hetzner.com/tutorials/coolify-supabase-deploy)
 - [Harden PostgreSQL SSL for Self-Hosted Supabase](https://community.hetzner.com/tutorials/coolify-supabase-postgresql-ssl-hardening)
 - [Protect Self-Hosted Services with CrowdSec and Traefik](https://community.hetzner.com/tutorials/coolify-crowdsec-traefik-supavisor-protection)
 - [Centralized Security Monitoring with Prometheus and Grafana](https://community.hetzner.com/tutorials/coolify-crowdsec-prometheus-grafana-monitoring)
+- [Centralized CrowdSec LAPI and management with Web UI](https://community.hetzner.com/tutorials/coolify-crowdsec-centralized-lapi)
 - [WAN Interface Monitoring on Fritzbox Router](https://medium.com/@khashashin/wan-interface-monitoring-722ad0f016fd)
 <!-- BLOG-POST-LIST:END -->
 
