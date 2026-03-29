@@ -3,7 +3,7 @@
 
 - 🔭 I’m currently working at [geoimpact AG](https://www.geoimpact.ch/)
 
-### Blogs posts
+### Guides & Tutorials I’ve Written
 <!-- BLOG-POST-LIST:START -->
 - [Deploy Self-Hosted Supabase on Hetzner Cloud with Coolify](https://community.hetzner.com/tutorials/coolify-supabase-deploy)
 - [Harden PostgreSQL SSL for Self-Hosted Supabase](https://community.hetzner.com/tutorials/coolify-supabase-postgresql-ssl-hardening)
